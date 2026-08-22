@@ -50,9 +50,7 @@ export const LandingPlantilla = () => {
         />
       )}
       {hasTestimonios && <TestimoniosSection data={testimoniosData} />}
-      {contactData && (
-        <ContactSection data={contactData} projects={projectsData?.projects ?? []} />
-      )}
+      {contactData && <ContactSection data={contactData} />}
     </div>
   );
 };

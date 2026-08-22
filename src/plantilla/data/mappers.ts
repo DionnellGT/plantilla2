@@ -61,27 +61,35 @@ export const mapNavigation = (bundle: ApiLandingBundle): NavigationData => ({
 });
 
 export const mapHero = (bundle: ApiLandingBundle): HeroData => {
-  const { banner } = bundle;
+  const { banner, proyectos } = bundle;
+  const primeraUbicacion = proyectos.find((p) => p.ubicacion)?.ubicacion;
 
   return {
-    title: banner?.titulo || "Es tiempo de cumplir un sueño",
-    subtitle: banner?.subtitulo || banner?.descripcion || "",
-    descripcion: banner?.descripcion || "",
-    ctaLabel: "Ver Parcelas",
-    ctaHref: "#parcelas",
+    eyebrow: primeraUbicacion || "Patagonia Chilena",
+    title: banner?.titulo || "Tu pedazo de paraíso en el Sur de Chile",
+    subtitle: banner?.subtitulo || "",
+    descripcion:
+      banner?.descripcion ||
+      "Parcelas y campos con acceso a lagos, bosque nativo y una tranquilidad que solo el sur te puede dar.",
+    ctaLabel: "Ver Proyectos",
+    ctaHref: "#proyectos",
+    secondaryCtaLabel: "Agendar Asesoría",
+    secondaryCtaHref: "#contacto",
     backgroundImage: banner?.imagen || LOGO_URL,
     backgroundAlt: banner?.titulo || BRAND_NAME,
   };
 };
 
 export const mapAbout = (bundle: ApiLandingBundle): AboutData => {
-  const { sobreMi } = bundle;
+  const { sobreMi, testimonios } = bundle;
 
   return {
-    title: sobreMi?.titulo || "Acerca de Nosotros",
+    eyebrow: "Nuestra Historia",
+    title: sobreMi?.titulo || "Expertos en Tierras del Sur",
     paragraphs: sobreMi?.paragraph ? sobreMi.paragraph.split(/\n{2,}/) : [],
     image: sobreMi?.imagen || LOGO_URL,
     imageAlt: sobreMi?.titulo || BRAND_NAME,
+    featuredQuote: testimonios[0]?.descripcion || undefined,
   };
 };
 
@@ -92,6 +100,7 @@ export const mapProjects = (bundle: ApiLandingBundle): ProjectsSectionData => {
     price: proyecto.precio || "Consultar precio",
     image: proyecto.imagenCaratula || LOGO_URL,
     imageAlt: proyecto.nombre,
+    ubicacion: proyecto.ubicacion || undefined,
     badge: proyecto.badgeLabel || undefined,
     badgeColor: proyecto.badgeColor || undefined,
     transitionDelayMs: (index % 3) * 100,
@@ -104,8 +113,10 @@ export const mapProjects = (bundle: ApiLandingBundle): ProjectsSectionData => {
   }));
 
   return {
-    title: "Parcelas y Campos",
-    subtitle: "Crédito directo a 11, 24 y 36 meses.",
+    eyebrow: "Nuestro Catálogo",
+    title: "Propiedades Destacadas",
+    subtitle:
+      "Cada propiedad es seleccionada por su ubicación, acceso y potencial de conexión con la naturaleza.",
     projects,
   };
 };
@@ -122,19 +133,21 @@ export const mapTestimonios = (bundle: ApiLandingBundle): TestimoniosSectionData
   }));
 
   return {
-    title: "Lo que dicen nuestros clientes",
+    eyebrow: "Testimonios",
+    title: "Historias de Nuestra Comunidad",
+    subtitle: "Familias que ya encontraron su lugar en el sur.",
     testimonios,
   };
 };
 
 export const mapContact = (bundle: ApiLandingBundle): ContactData => ({
-  title: "Contáctanos",
+  headline: "Conversemos sobre tu Próxima Propiedad",
   subtitle:
-    "¿Tienes dudas sobre algún proyecto? Déjanos tus datos y un asesor se pondrá en contacto contigo a la brevedad.",
+    "Cuéntanos qué estás buscando y te ayudamos a encontrar el terreno ideal para tu proyecto de vida.",
   namePlaceholder: "Tu nombre",
   phonePlaceholder: "+56 9 ...",
   emailPlaceholder: "ejemplo@correo.com",
-  projectPlaceholder: "Selecciona un proyecto",
+  messagePlaceholder: "Cuéntanos qué tipo de propiedad estás buscando...",
   submitLabel: "Enviar Mensaje",
   contact: mapContactInfo(bundle),
 });

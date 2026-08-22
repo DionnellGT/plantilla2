@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, Mountain } from "lucide-react";
 import { WhatsAppButton } from "./WhatsAppButton";
 import type { NavigationData } from "../data/interfaces";
 
@@ -13,23 +13,21 @@ export const MobileMenu = ({ data, isOpen, onClose }: MobileMenuProps) => {
 
   return (
     <div className="fixed inset-0 z-[60] md:hidden">
-      <div
-        className="absolute inset-0 bg-primary/40 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      <div className="relative bg-surface w-full h-full flex flex-col px-margin-mobile py-stack-lg">
-        <div className="flex justify-between items-center mb-section-gap">
-          <img alt={data.logoAlt} className="h-10 w-auto" src={data.logo} />
-          <button
-            className="text-primary"
-            onClick={onClose}
-            aria-label="Cerrar menú"
-          >
-            <X className="w-6 h-6" />
+      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-surface w-full h-full flex flex-col px-margin-mobile py-stack-sm">
+        <div className="flex justify-between items-center mb-stack-lg">
+          <div className="flex items-center gap-2">
+            <Mountain className="text-primary w-7 h-7" />
+            <span className="font-headline-md text-headline-md text-on-surface">
+              {data.logoAlt}
+            </span>
+          </div>
+          <button className="text-on-surface" onClick={onClose} aria-label="Cerrar menú">
+            <X className="w-7 h-7" />
           </button>
         </div>
 
-        <nav className="flex flex-col gap-stack-lg font-headline-md text-headline-md text-primary">
+        <nav className="flex flex-col gap-stack-sm font-headline-md text-headline-md text-on-surface">
           {data.links.map((link) => (
             <a key={link.id} href={link.href} onClick={onClose}>
               {link.label}
@@ -38,7 +36,7 @@ export const MobileMenu = ({ data, isOpen, onClose }: MobileMenuProps) => {
         </nav>
 
         <div className="mt-auto">
-          <WhatsAppButton href={data.contact.whatsappLink} className="w-full" />
+          <WhatsAppButton href={data.contact.whatsappLink} className="w-full justify-center" />
         </div>
       </div>
     </div>

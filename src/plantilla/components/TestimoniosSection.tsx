@@ -1,6 +1,5 @@
-import { Quote } from "lucide-react";
+import { Play, Quote } from "lucide-react";
 import type { TestimoniosSectionData } from "../data/interfaces";
-import  { cn } from "@/lib/utils";
 
 interface TestimoniosSectionProps {
   data: TestimoniosSectionData;
@@ -9,69 +8,68 @@ interface TestimoniosSectionProps {
 export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
   return (
     <section
-      className="py-20 bg-surface-container-low px-margin-mobile md:px-gutter scroll-mt-20"
+      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-20"
       id="testimonios"
     >
-      <div className="max-w-[1280px] mx-auto">
-        <div className="text-center mb-20 fade-and-slide-up visible">
-          <h2 className="font-headline-lg text-headline-lg text-primary mb-stack-md">
-            {data.title}
-          </h2>
-          <div className="h-1 w-16 bg-muted-gold mx-auto" />
-        </div>
+      <div className="text-center max-w-2xl mx-auto mb-stack-lg fade-and-slide-up visible">
+        <span className="font-label-md text-label-md text-primary uppercase tracking-widest mb-2 block">
+          {data.eyebrow}
+        </span>
+        <h2 className="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">
+          {data.title}
+        </h2>
+        <p className="font-body-md text-body-md text-on-surface-variant">{data.subtitle}</p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-lg">
-          {data.testimonios.map((testimonio) => (
-            <div
-              key={testimonio.id}
-              className="bg-surface p-stack-lg rounded-lg border border-slate-gray/10 fade-and-slide-up visible"
-              style={
-                testimonio.transitionDelayMs
-                  ? { transitionDelay: `${testimonio.transitionDelayMs}ms` }
-                  : undefined
-              }
-            >
-              <div className={cn(testimonio.tipoMedia === "video" ? 
-                                  "aspect-square bg-surface-variant rounded-lg mb-stack-md overflow-hidden relative"
-                                  : "aspect-square bg-surface-variant rounded-lg mb-stack-md overflow-hidden relative")}>
-                {testimonio.media ? (
-                  testimonio.tipoMedia === "video" ? (
-                    <video
-                      src={testimonio.media}
-                      controls
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <img
-                      src={testimonio.media}
-                      alt={testimonio.authorName}
-                      className="w-full h-full object-cover"
-                    />
-                  )
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {data.testimonios.map((testimonio) => (
+          <div
+            key={testimonio.id}
+            className="bg-surface-container-low rounded-[24px] overflow-hidden soft-shadow fade-and-slide-up visible"
+            style={
+              testimonio.transitionDelayMs
+                ? { transitionDelay: `${testimonio.transitionDelayMs}ms` }
+                : undefined
+            }
+          >
+            <div className="relative aspect-video bg-surface-variant group">
+              {testimonio.media ? (
+                testimonio.tipoMedia === "video" ? (
+                  <video src={testimonio.media} controls className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <Quote className="w-10 h-10 text-primary/30" />
-                  </div>
-                )}
-              </div>
+                  <img
+                    src={testimonio.media}
+                    alt={testimonio.authorName}
+                    className="w-full h-full object-cover"
+                  />
+                )
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <Quote className="text-on-surface-variant/30 w-10 h-10" />
+                </div>
+              )}
 
+              {testimonio.tipoMedia === "video" && (
+                <div className="absolute inset-0 bg-on-surface/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  <div className="w-14 h-14 rounded-full bg-surface-container-lowest/90 flex items-center justify-center">
+                    <Play className="text-primary w-7 h-7 fill-current" />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="p-6">
               {testimonio.quote && (
-                <p className="font-body-md text-body-md text-on-surface-variant italic mb-stack-md">
+                <p className="font-body-md text-body-md text-on-surface-variant italic mb-4">
                   "{testimonio.quote}"
                 </p>
               )}
-
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-muted-gold flex items-center justify-center text-primary font-bold">
-                  {testimonio.authorInitials}
-                </div>
-                <p className="font-label-md text-label-md text-primary font-semibold">
-                  {testimonio.authorName}
-                </p>
-              </div>
+              <p className="font-label-md text-label-md text-on-surface">
+                — {testimonio.authorName}
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

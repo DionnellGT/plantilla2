@@ -1,3 +1,4 @@
+import { Mountain } from "lucide-react";
 import type { FooterData } from "../data/interfaces";
 
 interface FooterProps {
@@ -19,69 +20,56 @@ const socialIcons = {
 
 export const Footer = ({ data }: FooterProps) => {
   return (
-    <footer className="bg-primary dark:bg-primary-container mt-section-gap w-full py-stack-lg px-gutter fade-and-slide-up visible">
-      <div className="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row justify-between items-start gap-stack-lg">
-        <div className="w-full md:w-1/3">
-          <img
-            alt={data.logoAlt}
-            className="h-12 w-auto mb-stack-md brightness-0 invert"
-            src={data.logo}
-          />
-          <p className="font-body-md text-body-md text-on-primary/70 mb-stack-md">
-            {data.description}
-          </p>
-          <p className="font-label-sm text-label-sm text-secondary-fixed-dim">
-            {data.copyright}
-          </p>
+    <footer className="bg-surface-container-high py-stack-md px-margin-mobile md:px-gutter">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <Mountain className="text-primary w-6 h-6" />
+            <span className="font-headline-md text-lg text-on-surface">{data.logoAlt}</span>
+          </div>
+          <p className="text-sm text-on-surface-variant">{data.description}</p>
         </div>
 
-        <div className="w-full md:w-1/4">
-          <h4 className="font-label-md text-label-md text-on-primary font-bold mb-stack-md">
+        <div>
+          <h4 className="font-label-md text-label-md text-on-surface mb-4">
             {data.linkGroup.title}
           </h4>
-          <nav className="flex flex-col gap-unit font-label-sm text-label-sm text-secondary-fixed-dim">
+          <div className="flex flex-col gap-2">
             {data.linkGroup.links.map((link) => (
               <a
                 key={link.id}
-                className="hover:text-muted-gold transition-colors duration-300"
+                className="text-sm text-on-surface-variant hover:text-primary transition-colors"
                 href={link.href}
               >
                 {link.label}
               </a>
             ))}
-          </nav>
-        </div>
-
-        <div className="w-full md:w-1/4">
-          <h4 className="font-label-md text-label-md text-on-primary font-bold mb-stack-md">
-            {data.socialLinks.length > 0 ? "Síguenos" : ""}
-          </h4>
-          <div className="flex flex-col gap-unit font-label-sm text-label-sm text-secondary-fixed-dim">
-            {data.socialLinks.map((social) => (
-              <a
-                key={social.id}
-                className="flex items-center gap-2 hover:text-muted-gold transition-colors duration-300"
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {socialIcons[social.icon]}
-                {social.name}
-              </a>
-            ))}
           </div>
         </div>
 
-        <div className="w-full md:w-1/4">
-          <h4 className="font-label-md text-label-md text-on-primary font-bold mb-stack-md">
-            Encuéntranos
-          </h4>
-          <div className="flex flex-col gap-unit font-label-sm text-label-sm text-secondary-fixed-dim">
-            {data.contact.phone && <p>{data.contact.phone}</p>}
-            {data.contact.email && <p>{data.contact.email}</p>}
-            {data.contact.address && <p>{data.contact.address}</p>}
+        {data.socialLinks.length > 0 && (
+          <div>
+            <h4 className="font-label-md text-label-md text-on-surface mb-4">Síguenos</h4>
+            <div className="flex gap-4">
+              {data.socialLinks.map((social) => (
+                <a
+                  key={social.id}
+                  className="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-colors"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                >
+                  {socialIcons[social.icon]}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
+      </div>
+
+      <div className="max-w-[1280px] mx-auto border-t border-outline-variant pt-6 text-center text-sm text-on-surface-variant">
+        {data.copyright}
       </div>
     </footer>
   );

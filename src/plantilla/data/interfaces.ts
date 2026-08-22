@@ -32,20 +32,26 @@ export interface NavigationData {
 }
 
 export interface HeroData {
+  eyebrow: string;
   title: string;
   subtitle: string;
   descripcion: string;
   ctaLabel: string;
   ctaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
   backgroundImage: string;
   backgroundAlt: string;
 }
 
 export interface AboutData {
+  eyebrow: string;
   title: string;
   paragraphs: string[];
   image: string;
   imageAlt: string;
+  /** Cita destacada para la insignia sobre la foto (viene del primer testimonio, si existe). */
+  featuredQuote?: string;
 }
 
 export interface Project {
@@ -54,6 +60,7 @@ export interface Project {
   price: string;
   image: string;
   imageAlt: string;
+  ubicacion?: string;
   badge?: string;
   badgeColor?: string;
   transitionDelayMs?: number;
@@ -67,6 +74,7 @@ export interface Project {
 }
 
 export interface ProjectsSectionData {
+  eyebrow: string;
   title: string;
   subtitle: string;
   projects: Project[];
@@ -93,12 +101,12 @@ export interface ContactFormOption {
 }
 
 export interface ContactData {
-  title: string;
+  headline: string;
   subtitle: string;
   namePlaceholder: string;
   phonePlaceholder: string;
   emailPlaceholder: string;
-  projectPlaceholder: string;
+  messagePlaceholder: string;
   submitLabel: string;
   contact: ContactInfo;
 }
@@ -116,7 +124,9 @@ export interface Testimonio {
 }
 
 export interface TestimoniosSectionData {
+  eyebrow: string;
   title: string;
+  subtitle: string;
   testimonios: Testimonio[];
 }
 

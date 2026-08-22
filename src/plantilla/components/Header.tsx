@@ -1,4 +1,6 @@
-import { Menu } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Mountain, Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { WhatsAppButton } from "./WhatsAppButton";
 import type { NavigationData } from "../data/interfaces";
 
@@ -8,41 +10,54 @@ interface HeaderProps {
 }
 
 export const Header = ({ data, onOpenMobileMenu }: HeaderProps) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-slate-gray/10 sticky top-0 z-50 w-full transition-all duration-300">
-      <div className="flex justify-between items-center w-full px-gutter max-w-[1280px] mx-auto h-20">
-        <a className="flex-shrink-0" href="#">
-          <img alt={data.logoAlt} className="h-10 w-auto" src={data.logo} />
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled ? "bg-surface/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+      )}
+    >
+      <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-margin-mobile md:px-gutter py-4">
+        <a className="flex items-center gap-2" href="#">
+          <Mountain className="text-primary w-7 h-7" />
+          <span className="font-headline-md text-headline-md text-on-surface">
+            {data.logoAlt}
+          </span>
         </a>
 
-        <nav className="hidden md:flex gap-8 items-center font-label-md text-label-md">
-          {data.links.map((link, index) => (
+        <div className="hidden md:flex items-center gap-8">
+          {data.links.map((link) => (
             <a
               key={link.id}
-              className={
-                index === 0
-                  ? "text-primary border-b-2 border-primary pb-1"
-                  : "text-secondary hover:text-muted-gold transition-colors duration-300"
-              }
+              className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
               href={link.href}
             >
               {link.label}
             </a>
           ))}
-        </nav>
+        </div>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-4">
           <WhatsAppButton href={data.contact.whatsappLink} />
         </div>
 
         <button
-          className="md:hidden text-primary"
+          className="md:hidden text-on-surface"
           onClick={onOpenMobileMenu}
           aria-label="Abrir menú"
         >
-          <Menu className="w-6 h-6" />
+          <Menu className="w-7 h-7" />
         </button>
-      </div>
+      </nav>
     </header>
   );
 };

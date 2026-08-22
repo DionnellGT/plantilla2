@@ -1,32 +1,29 @@
 import { useState, type FormEvent } from "react";
-import { ChevronDown } from "lucide-react";
-import type { ContactData, Project } from "../data/interfaces";
+import { Mail, Phone } from "lucide-react";
+import type { ContactData } from "../data/interfaces";
 
 interface ContactSectionProps {
   data: ContactData;
-  projects: Project[];
 }
 
 const inputClasses =
-  "w-full bg-surface-container-low text-on-surface-variant font-body-md text-body-md placeholder:text-on-surface-variant/50 rounded-md px-4 py-3 border border-transparent focus:outline-none focus:border-muted-gold transition-colors";
+  "bg-surface-container border border-outline-variant rounded-xl px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary transition-colors";
 
-export const ContactSection = ({ data, projects }: ContactSectionProps) => {
+export const ContactSection = ({ data }: ContactSectionProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [projectId, setProjectId] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const projectTitle = projects.find((project) => project.id === projectId)?.title;
 
     const lines = [
       "Hola, me gustaría recibir más información.",
       name && `Nombre: ${name}`,
       phone && `Teléfono: ${phone}`,
       email && `Correo: ${email}`,
-      projectTitle && `Proyecto de interés: ${projectTitle}`,
+      message && `Mensaje: ${message}`,
     ].filter(Boolean);
 
     const whatsappUrl = `${data.contact.whatsappLink}?text=${encodeURIComponent(lines.join("\n"))}`;
@@ -35,110 +32,84 @@ export const ContactSection = ({ data, projects }: ContactSectionProps) => {
 
   return (
     <section
-      className="py-20 px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-20"
+      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-20"
       id="contacto"
     >
-      <div className="text-center mb-20 fade-and-slide-up visible">
-        <h2 className="font-headline-lg text-headline-lg text-primary mb-stack-md">
-          {data.title}
-        </h2>
-        <p className="font-body-md text-body-md text-secondary max-w-2xl mx-auto">
-          {data.subtitle}
-        </p>
-      </div>
+      <div className="bg-surface-container-low rounded-[32px] overflow-hidden soft-shadow grid grid-cols-1 lg:grid-cols-2 fade-and-slide-up visible">
+        <div className="bg-primary text-on-primary p-10 md:p-16 flex flex-col justify-center relative overflow-hidden">
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary-container rounded-full opacity-30" />
 
-      <form
-        onSubmit={handleSubmit}
-        className="border border-outline rounded-xl px-6 py-12 max-w-[900px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-stack-md fade-and-slide-up visible"
-      >
-        <div className="mb-6 md:mb-3">
-          <label
-            htmlFor="contact-name"
-            className="block font-label-md text-label-md text-gray-500 font-bold mb-3"
-          >
-            Nombre Completo
-          </label>
-          <input
-            id="contact-name"
-            type="text"
-            className={inputClasses}
-            placeholder={data.namePlaceholder}
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            required
-          />
-        </div>
+          <h2 className="font-headline-lg text-headline-lg mb-stack-sm relative z-10">
+            {data.headline}
+          </h2>
+          <p className="font-body-md text-body-md text-primary-fixed mb-stack-md relative z-10">
+            {data.subtitle}
+          </p>
 
-        <div className="mb-6 md:mb-3">
-          <label
-            htmlFor="contact-phone"
-            className="block font-label-md text-label-md text-gray-500 font-bold mb-3"
-          >
-            Teléfono
-          </label>
-          <input
-            id="contact-phone"
-            type="tel"
-            className={inputClasses}
-            placeholder={data.phonePlaceholder}
-            value={phone}
-            onChange={(event) => setPhone(event.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-6 md:mb-3">
-          <label
-            htmlFor="contact-email"
-            className="block font-label-md text-label-md text-gray-500 font-bold mb-3"
-          >
-            Correo Electrónico
-          </label>
-          <input
-            id="contact-email"
-            type="email"
-            className={inputClasses}
-            placeholder={data.emailPlaceholder}
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-6 md:mb-3">
-          <label
-            htmlFor="contact-project"
-            className="block font-label-md text-label-md text-gray-500 font-bold mb-3"
-          >
-            Proyecto de Interés
-          </label>
-          <div className="relative">
-            <select
-              id="contact-project"
-              className={`${inputClasses} appearance-none pr-10 cursor-pointer`}
-              value={projectId}
-              onChange={(event) => setProjectId(event.target.value)}
-            >
-              <option value="" disabled>
-                {data.projectPlaceholder}
-              </option>
-              {projects.map((project) => (
-                <option key={project.id} value={project.id}>
-                  {project.title}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-on-surface-variant" />
+          <div className="flex flex-col gap-4 relative z-10">
+            {data.contact.email && (
+              <a
+                className="flex items-center gap-3 hover:text-primary-fixed transition-colors"
+                href={`mailto:${data.contact.email}`}
+              >
+                <Mail className="w-5 h-5" />
+                {data.contact.email}
+              </a>
+            )}
+            {data.contact.phone && (
+              <a
+                className="flex items-center gap-3 hover:text-primary-fixed transition-colors"
+                href={`tel:${data.contact.phone}`}
+              >
+                <Phone className="w-5 h-5" />
+                {data.contact.phone}
+              </a>
+            )}
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="mb-6 md:mb-3 rounded-xl md:col-span-2 bg-primary text-on-primary font-label-md uppercase tracking-wide py-4 hover:bg-muted-gold hover:text-primary transition-colors duration-300"
-        >
-          {data.submitLabel}
-        </button>
-      </form>
+        <div className="p-10 md:p-16">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <input
+              type="text"
+              className={inputClasses}
+              placeholder={data.namePlaceholder}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              required
+            />
+            <input
+              type="tel"
+              className={inputClasses}
+              placeholder={data.phonePlaceholder}
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              required
+            />
+            <input
+              type="email"
+              className={inputClasses}
+              placeholder={data.emailPlaceholder}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+            <textarea
+              className={inputClasses}
+              placeholder={data.messagePlaceholder}
+              rows={4}
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+            />
+            <button
+              type="submit"
+              className="bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md hover:bg-primary-container transition-colors soft-shadow"
+            >
+              {data.submitLabel}
+            </button>
+          </form>
+        </div>
+      </div>
     </section>
   );
 };

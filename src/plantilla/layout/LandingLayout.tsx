@@ -16,7 +16,7 @@ export const LandingLayout = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-2 border-muted-gold border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -27,7 +27,7 @@ export const LandingLayout = () => {
         <p className="font-headline-md text-headline-md text-primary">
           No pudimos cargar esta página
         </p>
-        <p className="font-body-md text-body-md text-secondary max-w-md">
+        <p className="font-body-md text-body-md text-on-surface-variant max-w-md">
           Ocurrió un problema al conectarnos con el servidor. Intenta recargar la
           página en unos minutos.
         </p>
@@ -36,7 +36,7 @@ export const LandingLayout = () => {
   }
 
   return (
-    <div className="bg-background text-on-background font-body-md antialiased selection:bg-muted-gold selection:text-primary">
+    <div className="bg-background text-on-background font-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
       {navigationData && (
         <>
           <Header data={navigationData} onOpenMobileMenu={open} />

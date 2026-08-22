@@ -24,7 +24,7 @@ function DialogBackdrop({ className, ...props }: DialogPrimitive.Backdrop.Props)
     <DialogPrimitive.Backdrop
       data-slot="dialog-backdrop"
       className={cn(
-        "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
+        "fixed inset-0 z-50 bg-on-surface/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
         className
       )}
       {...props}
@@ -44,7 +44,7 @@ function DialogContent({
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 grid w-[calc(100%-2rem)] max-w-[600px] max-h-[90vh] -translate-x-1/2 -translate-y-1/2 gap-1 overflow-y-auto rounded-lg bg-surface p-stack-lg shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+          "fixed top-1/2 left-1/2 z-50 grid w-[calc(100%-2rem)] max-w-[600px] max-h-[90vh] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-[24px] bg-surface-container-lowest soft-shadow p-8 transition-all duration-300 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
           className
         )}
         {...props}
@@ -53,9 +53,9 @@ function DialogContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="absolute top-4 right-4 text-secondary transition-colors hover:text-primary focus:outline-none disabled:pointer-events-none"
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-surface-container-lowest/90 flex items-center justify-center text-on-surface transition-colors hover:text-primary focus:outline-none disabled:pointer-events-none"
           >
-            <XIcon className="size-6" />
+            <XIcon className="size-5" />
             <span className="sr-only">Cerrar</span>
           </DialogPrimitive.Close>
         )}
@@ -69,11 +69,11 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
     <DialogPrimitive.Title
       data-slot="dialog-title"
       className={cn(
-        "pr-10 font-headline-lg text-3xl sm:text-5xl leading-tight text-primary mb-unit",
+        "pr-10 font-headline-lg text-2xl sm:text-3xl leading-tight text-on-surface line-clamp-2",
         className
       )}
       {...props}
-    /> 
+    />
   )
 }
 
@@ -81,7 +81,7 @@ function DialogDescription({ className, ...props }: DialogPrimitive.Description.
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("font-label-md text-label-md text-secondary mb-stack-lg", className)}
+      className={cn("font-body-md text-body-md text-on-surface-variant", className)}
       {...props}
     />
   )

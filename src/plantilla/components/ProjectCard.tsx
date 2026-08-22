@@ -1,48 +1,65 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, ArrowRight } from "lucide-react";
 import type { Project } from "../data/interfaces";
 
 interface ProjectCardProps {
   project: Project;
+  index: number;
   onSelect: (project: Project) => void;
 }
 
-export const ProjectCard = ({ project, onSelect }: ProjectCardProps) => {
+const BADGE_STYLES = [
+  "bg-tertiary-fixed text-on-tertiary-fixed",
+  "bg-primary-fixed text-on-primary-fixed",
+  "bg-secondary-container text-on-secondary-container",
+];
+
+export const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
+  const badgeClass = BADGE_STYLES[index % BADGE_STYLES.length];
+
   return (
-    <Card
-      className="group relative bg-surface overflow-hidden rounded-lg border border-slate-gray/10 hover-scale cursor-pointer fade-and-slide-up visible p-0 gap-0"
-      style={
-        project.transitionDelayMs
-          ? { transitionDelay: `${project.transitionDelayMs}ms` }
-          : undefined
-      }
+    <div
+      className="group bg-surface-container-lowest rounded-[20px] overflow-hidden soft-shadow card-hover cursor-pointer fade-and-slide-up visible"
+      style={project.transitionDelayMs ? { transitionDelay: `${project.transitionDelayMs}ms` } : undefined}
       onClick={() => onSelect(project)}
     >
-      {project.badge && (
-        <div
-          className="rounded-2xl absolute top-4 right-4 z-10 bg-muted-gold text-primary px-3 py-1 font-label-sm uppercase"
-          style={project.badgeColor ? { backgroundColor: project.badgeColor } : undefined}
-        >
-          {project.badge}
-        </div>
-      )}
-      <div className="aspect-[1.5] overflow-hidden">
+      <div className="relative h-64 overflow-hidden">
         <img
           alt={project.imageAlt}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           src={project.image}
         />
+        {project.badge && (
+          <span
+            className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-label-md ${
+              project.badgeColor ? "" : badgeClass
+            }`}
+            style={project.badgeColor ? { backgroundColor: project.badgeColor, color: "#fff" } : undefined}
+          >
+            {project.badge}
+          </span>
+        )}
       </div>
-      <CardContent className="p-stack-md">
-        <h3 className="font-headline-md text-headline-md text-primary mb-unit">
-          {project.title}
-        </h3>
-        <p className="font-label-md text-label-md text-secondary mb-stack-md">
-          {project.price}
-        </p>
-        <span className="inline-block font-label-sm text-primary uppercase border-b border-primary pb-1 group-hover:text-muted-gold group-hover:border-muted-gold transition-colors">
-          Ver más
-        </span>
-      </CardContent>
-    </Card>
+
+      <div className="p-6">
+        <h3 className="font-headline-md text-xl text-on-surface mb-2">{project.title}</h3>
+
+        {project.ubicacion && (
+          <p className="flex items-center gap-1 text-sm text-on-surface-variant mb-4">
+            <MapPin className="w-4 h-4" />
+            {project.ubicacion}
+          </p>
+        )}
+
+        <div className="flex justify-between items-center pt-4 border-t border-outline-variant">
+          <div>
+            <p className="text-xs text-on-surface-variant">Desde</p>
+            <p className="font-headline-md text-lg text-primary">{project.price}</p>
+          </div>
+          <div className="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center group-hover:bg-primary transition-colors">
+            <ArrowRight className="w-4 h-4 text-primary group-hover:text-on-primary transition-colors" />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
