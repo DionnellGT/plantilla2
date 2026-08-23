@@ -7,7 +7,7 @@ interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
 }
 
-const INITIAL_VISIBLE = 6;
+const INITIAL_VISIBLE = 3;
 
 export const ProjectsSection = ({ data, onSelectProject }: ProjectsSectionProps) => {
   const [showAll, setShowAll] = useState(false);
@@ -49,7 +49,7 @@ export const ProjectsSection = ({ data, onSelectProject }: ProjectsSectionProps)
               onClick={() => setShowAll((prev) => !prev)}
               className="border-2 border-primary text-primary px-8 py-3 rounded-full font-label-md text-label-md font-semibold hover:bg-primary hover:text-on-primary transition-all"
             >
-              {showAll ? "Mostrar Menos" : "Cargar Más Propiedades"}
+              {showAll ? "Mostrar menos proyectos" : "Mostrar más proyectos"}
             </button>
           </div>
         )}
