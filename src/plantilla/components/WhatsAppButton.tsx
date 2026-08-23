@@ -17,14 +17,14 @@ export const WhatsAppButton = ({
   return (
     <a
       className={cn(
-        "inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-full font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors",
+        "text-white inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-full font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors",
         className
       )}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
-      {showIcon && <MessageSquare className="size-[18px]" />}
+      {showIcon && <MessageSquare className="size-[18px] " />}
       {label}
     </a>
   );

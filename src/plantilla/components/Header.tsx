@@ -38,7 +38,7 @@ export const Header = ({ data, onOpenMobileMenu }: HeaderProps) => {
           {data.links.map((link) => (
             <a
               key={link.id}
-              className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+              className="font-label-md text-label-xl font-bold text-on-surface-variant hover:text-primary transition-colors"
               href={link.href}
             >
               {link.label}
@@ -46,7 +46,7 @@ export const Header = ({ data, onOpenMobileMenu }: HeaderProps) => {
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4 text-amber-100">
           <WhatsAppButton href={data.contact.whatsappLink} />
         </div>
 

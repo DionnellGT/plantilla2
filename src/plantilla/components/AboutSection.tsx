@@ -36,13 +36,13 @@ export const AboutSection = ({ data }: AboutSectionProps) => {
           </div>
 
           {data.featuredQuote && (
-            <div className="absolute -bottom-6 -right-6 md:-right-10 bg-surface-container-lowest rounded-2xl p-5 soft-shadow max-w-[240px] hidden sm:block">
+            <div className="absolute -bottom-6 -right-6 md:-right-10 bg-surface-container-lowest rounded-2xl p-5 soft-shadow max-w-[270px] hidden sm:block">
               <div className="flex items-center gap-1 mb-2">
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Star key={index} className="text-secondary w-4 h-4 fill-current" />
                 ))}
               </div>
-              <p className="font-body-md text-body-md text-on-surface-variant italic">
+              <p className="font-body-md text-body-md text-on-surface-variant italic line-clamp-5">
                 "{data.featuredQuote}"
               </p>
             </div>
