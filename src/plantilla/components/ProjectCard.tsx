@@ -30,7 +30,7 @@ export const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
         />
         {project.badge && (
           <span
-            className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-label-md ${
+            className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-label-md font-semibold ${
               project.badgeColor ? "" : badgeClass
             }`}
             style={project.badgeColor ? { backgroundColor: project.badgeColor, color: "#fff" } : undefined}
@@ -41,7 +41,9 @@ export const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
       </div>
 
       <div className="p-6">
-        <h3 className="font-headline-md text-xl text-on-surface mb-2">{project.title}</h3>
+        <h3 className="font-headline-md text-xl font-semibold text-on-surface mb-2">
+          {project.title}
+        </h3>
 
         {project.ubicacion && (
           <p className="flex items-center gap-1 text-sm text-on-surface-variant mb-4">
@@ -53,7 +55,7 @@ export const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
         <div className="flex justify-between items-center pt-4 border-t border-outline-variant">
           <div>
             <p className="text-xs text-on-surface-variant">Desde</p>
-            <p className="font-headline-md text-lg text-primary">{project.price}</p>
+            <p className="font-headline-md text-lg font-semibold text-primary">{project.price}</p>
           </div>
           <div className="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center group-hover:bg-primary transition-colors">
             <ArrowRight className="w-4 h-4 text-primary group-hover:text-on-primary transition-colors" />

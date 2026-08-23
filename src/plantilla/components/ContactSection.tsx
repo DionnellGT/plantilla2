@@ -39,7 +39,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
         <div className="bg-primary text-on-primary p-10 md:p-16 flex flex-col justify-center relative overflow-hidden">
           <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary-container rounded-full opacity-30" />
 
-          <h2 className="font-headline-lg text-headline-lg mb-stack-sm relative z-10">
+          <h2 className="font-headline-lg text-headline-lg font-semibold mb-stack-sm relative z-10">
             {data.headline}
           </h2>
           <p className="font-body-md text-body-md text-primary-fixed mb-stack-md relative z-10">
@@ -103,7 +103,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
             />
             <button
               type="submit"
-              className="bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md hover:bg-primary-container transition-colors soft-shadow"
+              className="bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors soft-shadow"
             >
               {data.submitLabel}
             </button>

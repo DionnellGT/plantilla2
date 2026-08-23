@@ -25,13 +25,15 @@ export const Footer = ({ data }: FooterProps) => {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <Mountain className="text-primary w-6 h-6" />
-            <span className="font-headline-md text-lg text-on-surface">{data.logoAlt}</span>
+            <span className="font-headline-md text-lg font-semibold text-on-surface">
+              {data.logoAlt}
+            </span>
           </div>
           <p className="text-sm text-on-surface-variant">{data.description}</p>
         </div>
 
         <div>
-          <h4 className="font-label-md text-label-md text-on-surface mb-4">
+          <h4 className="font-label-md text-label-md font-semibold text-on-surface mb-4">
             {data.linkGroup.title}
           </h4>
           <div className="flex flex-col gap-2">
@@ -49,7 +51,9 @@ export const Footer = ({ data }: FooterProps) => {
 
         {data.socialLinks.length > 0 && (
           <div>
-            <h4 className="font-label-md text-label-md text-on-surface mb-4">Síguenos</h4>
+            <h4 className="font-label-md text-label-md font-semibold text-on-surface mb-4">
+              Síguenos
+            </h4>
             <div className="flex gap-4">
               {data.socialLinks.map((social) => (
                 <a

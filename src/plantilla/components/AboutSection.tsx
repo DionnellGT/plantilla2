@@ -50,10 +50,10 @@ export const AboutSection = ({ data }: AboutSectionProps) => {
         </div>
 
         <div className="fade-and-slide-up visible" style={{ transitionDelay: "100ms" }}>
-          <span className="font-label-md text-label-md text-primary uppercase tracking-widest mb-2 block">
+          <span className="font-label-md text-label-md font-semibold text-primary uppercase tracking-widest mb-2 block">
             {data.eyebrow}
           </span>
-          <h2 className="font-headline-lg text-headline-lg text-on-surface mb-stack-md">
+          <h2 className="font-headline-lg text-headline-lg font-semibold text-on-surface mb-stack-md">
             {data.title}
           </h2>
 
@@ -74,7 +74,9 @@ export const AboutSection = ({ data }: AboutSectionProps) => {
             {FEATURE_CARDS.map(({ icon: Icon, title, description }) => (
               <div key={title} className="bg-surface-container rounded-2xl p-5">
                 <Icon className="text-primary w-6 h-6 mb-2" />
-                <h3 className="font-label-md text-label-md text-on-surface mb-1">{title}</h3>
+                <h3 className="font-label-md text-label-md font-semibold text-on-surface mb-1">
+                  {title}
+                </h3>
                 <p className="text-sm text-on-surface-variant">{description}</p>
               </div>
             ))}

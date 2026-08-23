@@ -12,10 +12,10 @@ export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
       id="testimonios"
     >
       <div className="text-center max-w-2xl mx-auto mb-stack-lg fade-and-slide-up visible">
-        <span className="font-label-md text-label-md text-primary uppercase tracking-widest mb-2 block">
+        <span className="font-label-md text-label-md font-semibold text-primary uppercase tracking-widest mb-2 block">
           {data.eyebrow}
         </span>
-        <h2 className="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">
+        <h2 className="font-headline-lg text-headline-lg font-semibold text-on-surface mb-stack-sm">
           {data.title}
         </h2>
         <p className="font-body-md text-body-md text-on-surface-variant">{data.subtitle}</p>
@@ -64,7 +64,7 @@ export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
                   "{testimonio.quote}"
                 </p>
               )}
-              <p className="font-label-md text-label-md text-on-surface">
+              <p className="font-label-md text-label-md font-semibold text-on-surface">
                 — {testimonio.authorName}
               </p>
             </div>

@@ -70,8 +70,8 @@ export const mapHero = (bundle: ApiLandingBundle): HeroData => {
     subtitle: banner?.subtitulo || "",
     descripcion:
       banner?.descripcion ||
-      "Parcelas y campos con acceso a lagos, bosque nativo y una tranquilidad que solo el sur te puede dar.",
-    ctaLabel: "Ver Proyectos",
+      "Asesoría experta y cercana para encontrar tu terreno ideal. Descubre parcelas exclusivas con bosques milenarios, ríos cristalinos y vistas inigualables.",
+    ctaLabel: "Ver Parcelas",
     ctaHref: "#proyectos",
     secondaryCtaLabel: "Agendar Asesoría",
     secondaryCtaHref: "#contacto",

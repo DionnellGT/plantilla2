@@ -1,4 +1,4 @@
-// Interfaces compartidas para la data de la Landing "Nina Belén Propiedades"
+// Interfaces compartidas para la data de la Landing "Parcelas del Sur"
 
 export interface NavLink {
   id: string;
@@ -11,8 +11,6 @@ export interface ContactInfo {
   whatsappLink: string;
   phone: string;
   email: string;
-  /** No viene del backend (LandingMisDatos no tiene dirección); se omite si no hay valor. */
-  address?: string;
 }
 
 export type SocialPlatform = "instagram" | "facebook";
@@ -93,11 +91,6 @@ export interface FooterData {
   linkGroup: FooterLinkGroup;
   socialLinks: SocialLink[];
   contact: ContactInfo;
-}
-
-export interface ContactFormOption {
-  id: string;
-  label: string;
 }
 
 export interface ContactData {

@@ -18,7 +18,7 @@ export const MobileMenu = ({ data, isOpen, onClose }: MobileMenuProps) => {
         <div className="flex justify-between items-center mb-stack-lg">
           <div className="flex items-center gap-2">
             <Mountain className="text-primary w-7 h-7" />
-            <span className="font-headline-md text-headline-md text-on-surface">
+            <span className="font-headline-md text-headline-md font-semibold text-on-surface">
               {data.logoAlt}
             </span>
           </div>
@@ -27,7 +27,7 @@ export const MobileMenu = ({ data, isOpen, onClose }: MobileMenuProps) => {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-stack-sm font-headline-md text-headline-md text-on-surface">
+        <nav className="flex flex-col gap-stack-sm font-headline-md text-headline-md font-semibold text-on-surface">
           {data.links.map((link) => (
             <a key={link.id} href={link.href} onClick={onClose}>
               {link.label}

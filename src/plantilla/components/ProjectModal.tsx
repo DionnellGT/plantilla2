@@ -25,7 +25,7 @@ export const ProjectModal = ({ project, onOpenChange }: ProjectModalProps) => {
               />
               {typeof project.lotesDisponibles === "number" && (
                 <div className="absolute bottom-4 left-4 bg-surface-container-lowest/90 px-4 py-2 rounded-full">
-                  <p className="text-sm font-label-md text-on-surface">
+                  <p className="text-sm font-label-md font-semibold text-on-surface">
                     {project.lotesDisponibles} lote(s) disponible(s)
                   </p>
                 </div>
@@ -40,11 +40,13 @@ export const ProjectModal = ({ project, onOpenChange }: ProjectModalProps) => {
                 </p>
               )}
 
-              <DialogTitle className="font-headline-lg text-2xl text-on-surface mb-2">
+              <DialogTitle className="font-headline-lg text-2xl font-semibold text-on-surface mb-2">
                 {project.title}
               </DialogTitle>
 
-              <p className="font-headline-md text-xl text-primary mb-4">{project.price}</p>
+              <p className="font-headline-md text-xl font-semibold text-primary mb-4">
+                {project.price}
+              </p>
 
               {project.descripcion && (
                 <p className="text-on-surface-variant mb-6">{project.descripcion}</p>
@@ -68,7 +70,7 @@ export const ProjectModal = ({ project, onOpenChange }: ProjectModalProps) => {
                       href={project.link360Maps}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 bg-primary text-on-primary py-3 rounded-full text-center font-label-md text-label-md hover:bg-primary-container transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 bg-primary text-on-primary py-3 rounded-full text-center font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors flex items-center justify-center gap-2"
                     >
                       <RotateCw className="w-4 h-4" />
                       Ver Tour 360°
@@ -79,7 +81,7 @@ export const ProjectModal = ({ project, onOpenChange }: ProjectModalProps) => {
                       href={project.linkGoogleMaps}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 border-2 border-primary text-primary py-3 rounded-full text-center font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 border-2 border-primary text-primary py-3 rounded-full text-center font-label-md text-label-md font-semibold hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2"
                     >
                       <MapIcon className="w-4 h-4" />
                       Ver en Maps

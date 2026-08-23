@@ -24,7 +24,7 @@ export const LandingLayout = () => {
   if (isError) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-2 bg-background px-margin-mobile text-center">
-        <p className="font-headline-md text-headline-md text-primary">
+        <p className="font-headline-md text-headline-md font-semibold text-primary">
           No pudimos cargar esta página
         </p>
         <p className="font-body-md text-body-md text-on-surface-variant max-w-md">

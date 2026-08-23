@@ -22,10 +22,10 @@ export const ProjectsSection = ({ data, onSelectProject }: ProjectsSectionProps)
     >
       <div className="max-w-[1280px] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-stack-lg fade-and-slide-up visible">
-          <span className="font-label-md text-label-md text-primary uppercase tracking-widest mb-2 block">
+          <span className="font-label-md text-label-md font-semibold text-primary uppercase tracking-widest mb-2 block">
             {data.eyebrow}
           </span>
-          <h2 className="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">
+          <h2 className="font-headline-lg text-headline-lg font-semibold text-on-surface mb-stack-sm">
             {data.title}
           </h2>
           <p className="font-body-md text-body-md text-on-surface-variant">{data.subtitle}</p>
@@ -47,7 +47,7 @@ export const ProjectsSection = ({ data, onSelectProject }: ProjectsSectionProps)
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="border-2 border-primary text-primary px-8 py-3 rounded-full font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all"
+              className="border-2 border-primary text-primary px-8 py-3 rounded-full font-label-md text-label-md font-semibold hover:bg-primary hover:text-on-primary transition-all"
             >
               {showAll ? "Mostrar Menos" : "Cargar Más Propiedades"}
             </button>
