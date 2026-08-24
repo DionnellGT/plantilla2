@@ -21,7 +21,7 @@ export const HeroSection = ({ data }: HeroSectionProps) => {
       <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/75 md:via-surface/55 to-transparent" />
 
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-margin-mobile md:px-gutter">
-        <div className="max-w-xl text-left fade-and-slide-up visible">
+        <div className="mx-auto max-w-3xl text-left fade-and-slide-up visible">
           <div className="flex items-center gap-2 mb-stack-sm">
             <MapPin className="text-tertiary w-5 h-5 shrink-0" />
             <span className="font-label-md text-label-md font-semibold text-tertiary uppercase tracking-widest">
