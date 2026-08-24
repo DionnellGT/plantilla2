@@ -6,12 +6,17 @@ import { useNavigation } from "../hook/useNavigation";
 import { useFooter } from "../hook/useFooter";
 import { useLandingBundle } from "../hook/useLandingBundle";
 import { useMobileMenu } from "../hook/useMobileMenu";
+import { useEffect } from "react";
 
 export const LandingLayout = () => {
   const { isLoading, isError } = useLandingBundle();
   const { data: navigationData } = useNavigation();
   const { data: footerData } = useFooter();
   const { isOpen, open, close } = useMobileMenu();
+
+  useEffect(() => {
+    document.title = `${navigationData?.brandNameLine1 ?? ""}${navigationData?.brandNameLine2 ?? ""}`;
+  }, [navigationData]);
 
   if (isLoading) {
     return (
