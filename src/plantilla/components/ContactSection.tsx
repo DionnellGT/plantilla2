@@ -55,7 +55,9 @@ export const ContactSection = ({ data, projects }: ContactSectionProps) => {
             {data.contact.email && (
               <a
                 className="flex items-center gap-3 hover:text-primary-fixed transition-colors"
-                href={`mailto:${data.contact.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${data.contact.email}&su=Consulta&body=Hola,%20me%20interesa...`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Mail className="w-5 h-5" />
                 {data.contact.email}
@@ -64,7 +66,9 @@ export const ContactSection = ({ data, projects }: ContactSectionProps) => {
             {data.contact.phone && (
               <a
                 className="flex items-center gap-3 hover:text-primary-fixed transition-colors"
-                href={`tel:${data.contact.phone}`}
+                href={`https://wa.me/${data.contact.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Phone className="w-5 h-5" />
                 {data.contact.phone}
