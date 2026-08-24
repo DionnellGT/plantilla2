@@ -40,8 +40,8 @@ const buildWhatsappLink = (telefono: string): string => {
 
 /**
  * Nombre y apellido reales de misDatos, para mostrar la marca en 2 líneas
- * (ej: "Gonzalo" / "Galvez"). Si el asesor no cargó apellido, la segunda
- * línea queda vacía y solo se muestra el nombre.
+ * (ej: "Gonzalo" / "Galvez") cuando no hay imagen de logo. Si el asesor no
+ * cargó apellido, la segunda línea queda vacía y solo se muestra el nombre.
  */
 const getBrandNameLines = (bundle: ApiLandingBundle): { line1: string; line2: string } => {
   const { misDatos } = bundle;

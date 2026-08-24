@@ -28,11 +28,17 @@ export const Header = ({ data, onOpenMobileMenu }: HeaderProps) => {
     >
       <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-margin-mobile md:px-gutter py-4">
         <a className="flex items-center gap-2" href="#">
-          <Mountain className="text-primary w-7 h-7" />
-          <span className="font-headline-md text-headline-md font-semibold text-on-surface leading-tight flex flex-col">
-            <span>{data.brandNameLine1}</span>
-            {data.brandNameLine2 && <span>{data.brandNameLine2}</span>}
-          </span>
+          {data.logo ? (
+            <img src={data.logo} alt={data.logoAlt} className="h-9 w-auto object-contain" />
+          ) : (
+            <>
+              <Mountain className="text-primary w-7 h-7" />
+              <span className="font-headline-md text-headline-md font-semibold text-on-surface leading-tight flex flex-col">
+                <span>{data.brandNameLine1}</span>
+                {data.brandNameLine2 && <span>{data.brandNameLine2}</span>}
+              </span>
+            </>
+          )}
         </a>
 
         <div className="hidden md:flex items-center gap-8">

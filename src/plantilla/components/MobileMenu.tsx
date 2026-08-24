@@ -17,10 +17,17 @@ export const MobileMenu = ({ data, isOpen, onClose }: MobileMenuProps) => {
       <div className="relative bg-surface w-full h-full flex flex-col px-margin-mobile py-stack-sm">
         <div className="flex justify-between items-center mb-stack-lg">
           <div className="flex items-center gap-2">
-            <Mountain className="text-primary w-7 h-7" />
-            <span className="font-headline-md text-headline-md font-semibold text-on-surface">
-              {data.logoAlt}
-            </span>
+            {data.logo ? (
+              <img src={data.logo} alt={data.logoAlt} className="h-9 w-auto object-contain" />
+            ) : (
+              <>
+                <Mountain className="text-primary w-7 h-7" />
+                <span className="font-headline-md text-headline-md font-semibold text-on-surface leading-tight flex flex-col">
+                  <span>{data.brandNameLine1}</span>
+                  {data.brandNameLine2 && <span>{data.brandNameLine2}</span>}
+                </span>
+              </>
+            )}
           </div>
           <button className="text-on-surface" onClick={onClose} aria-label="Cerrar menú">
             <X className="w-7 h-7" />

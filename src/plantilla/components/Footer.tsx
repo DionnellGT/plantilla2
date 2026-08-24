@@ -24,11 +24,17 @@ export const Footer = ({ data }: FooterProps) => {
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Mountain className="text-primary w-6 h-6" />
-            <span className="font-headline-md text-lg font-semibold text-on-surface leading-tight flex flex-col">
-              <span>{data.brandNameLine1}</span>
-              {data.brandNameLine2 && <span>{data.brandNameLine2}</span>}
-            </span>
+            {data.logo ? (
+              <img src={data.logo} alt={data.logoAlt} className="h-8 w-auto object-contain" />
+            ) : (
+              <>
+                <Mountain className="text-primary w-6 h-6" />
+                <span className="font-headline-md text-lg font-semibold text-on-surface leading-tight flex flex-col">
+                  <span>{data.brandNameLine1}</span>
+                  {data.brandNameLine2 && <span>{data.brandNameLine2}</span>}
+                </span>
+              </>
+            )}
           </div>
           <p className="text-sm text-on-surface-variant">{data.description}</p>
         </div>
