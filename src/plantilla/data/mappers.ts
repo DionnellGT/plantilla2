@@ -108,7 +108,7 @@ export const mapAbout = (bundle: ApiLandingBundle): AboutData => {
   return {
     eyebrow: "Nuestra Historia",
     title: sobreMi?.titulo || "Expertos en Tierras del Sur",
-    paragraphs: sobreMi?.paragraph ? sobreMi.paragraph.split(/\n{2,}/) : [],
+    body: sobreMi?.paragraph || "",
     image: sobreMi?.imagen || LOGO_URL,
     imageAlt: sobreMi?.titulo || BRAND_NAME,
     featuredQuote: testimonios[0]?.descripcion || undefined,

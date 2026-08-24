@@ -57,18 +57,11 @@ export const AboutSection = ({ data }: AboutSectionProps) => {
             {data.title}
           </h2>
 
-          {data.paragraphs.map((paragraph, index) => (
-            <p
-              key={index}
-              className={
-                index < data.paragraphs.length - 1
-                  ? "font-body-md text-body-md text-on-surface-variant mb-stack-sm"
-                  : "font-body-md text-body-md text-on-surface-variant mb-stack-md"
-              }
-            >
-              {paragraph}
+          {data.body && (
+            <p className="font-body-md text-body-md text-on-surface-variant mb-stack-md whitespace-pre-line">
+              {data.body}
             </p>
-          ))}
+          )}
 
           <div className="grid grid-cols-2 gap-4">
             {FEATURE_CARDS.map(({ icon: Icon, title, description }) => (

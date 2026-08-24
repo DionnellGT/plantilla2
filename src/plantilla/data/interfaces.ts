@@ -47,7 +47,8 @@ export interface HeroData {
 export interface AboutData {
   eyebrow: string;
   title: string;
-  paragraphs: string[];
+  /** Texto tal cual viene de la API, con sus saltos de línea originales. */
+  body: string;
   image: string;
   imageAlt: string;
   /** Cita destacada para la insignia sobre la foto (viene del primer testimonio, si existe). */
