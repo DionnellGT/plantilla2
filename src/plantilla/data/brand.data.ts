@@ -1,6 +1,6 @@
 // Constantes de marca reutilizadas entre secciones (header, footer, menú móvil)
 
-export const BRAND_NAME = "Parcelas del Sur";
+export const BRAND_NAME = "Parcelas los lagos";
 
 /**
  * Logo de respaldo: solo se usa si el asesor no subió su propio logo
