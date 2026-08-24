@@ -15,7 +15,7 @@ export const LandingLayout = () => {
   const { isOpen, open, close } = useMobileMenu();
 
   useEffect(() => {
-    document.title = `${navigationData?.brandNameLine1 ?? ""}${navigationData?.brandNameLine2 ?? ""}`;
+    document.title = `${navigationData?.brandNameLine1 ?? ""}  ${navigationData?.brandNameLine2 ?? ""}`;
   }, [navigationData]);
 
   if (isLoading) {
