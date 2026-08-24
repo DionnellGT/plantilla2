@@ -21,7 +21,7 @@ const FEATURE_CARDS = [
 export const AboutSection = ({ data }: AboutSectionProps) => {
   return (
     <section
-      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-20"
+      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-2"
       id="sobre-mi"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">

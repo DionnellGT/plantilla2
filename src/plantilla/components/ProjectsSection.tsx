@@ -17,7 +17,7 @@ export const ProjectsSection = ({ data, onSelectProject }: ProjectsSectionProps)
 
   return (
     <section
-      className="py-stack-lg px-margin-mobile md:px-gutter bg-surface-container-low scroll-mt-20"
+      className="py-stack-lg px-margin-mobile md:px-gutter bg-surface-container-low scroll-mt-2"
       id="proyectos"
     >
       <div className="max-w-[1280px] mx-auto">

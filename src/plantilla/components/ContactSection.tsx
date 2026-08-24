@@ -32,7 +32,7 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
 
   return (
     <section
-      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-20"
+      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-2"
       id="contacto"
     >
       <div className="bg-surface-container-low rounded-[32px] overflow-hidden soft-shadow grid grid-cols-1 lg:grid-cols-2 fade-and-slide-up visible">

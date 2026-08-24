@@ -8,7 +8,7 @@ interface TestimoniosSectionProps {
 export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
   return (
     <section
-      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-20"
+      className="py-stack-lg px-margin-mobile md:px-gutter max-w-[1280px] mx-auto scroll-mt-2"
       id="testimonios"
     >
       <div className="text-center max-w-2xl mx-auto mb-stack-lg fade-and-slide-up visible">
