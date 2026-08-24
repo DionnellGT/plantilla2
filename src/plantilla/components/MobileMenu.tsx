@@ -42,7 +42,7 @@ export const MobileMenu = ({ data, isOpen, onClose }: MobileMenuProps) => {
           ))}
         </nav>
 
-        <div className="mt-auto">
+        <div className="mt-auto text-amber-100">
           <WhatsAppButton href={data.contact.whatsappLink} className="w-full justify-center" />
         </div>
       </div>
