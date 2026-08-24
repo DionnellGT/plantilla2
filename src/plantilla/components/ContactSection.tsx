@@ -1,28 +1,33 @@
 import { useState, type FormEvent } from "react";
-import { Mail, Phone } from "lucide-react";
-import type { ContactData } from "../data/interfaces";
+import { ChevronDown, Mail, Phone } from "lucide-react";
+import type { ContactData, Project } from "../data/interfaces";
 
 interface ContactSectionProps {
   data: ContactData;
+  projects: Project[];
 }
 
 const inputClasses =
   "bg-surface-container border border-outline-variant rounded-xl px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary transition-colors";
 
-export const ContactSection = ({ data }: ContactSectionProps) => {
+export const ContactSection = ({ data, projects }: ContactSectionProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [projectId, setProjectId] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const projectTitle = projects.find((project) => project.id === projectId)?.title;
 
     const lines = [
       "Hola, me gustaría recibir más información.",
       name && `Nombre: ${name}`,
       phone && `Teléfono: ${phone}`,
       email && `Correo: ${email}`,
+      projectTitle && `Proyecto de interés: ${projectTitle}`,
       message && `Mensaje: ${message}`,
     ].filter(Boolean);
 
@@ -94,6 +99,21 @@ export const ContactSection = ({ data }: ContactSectionProps) => {
               onChange={(event) => setEmail(event.target.value)}
               required
             />
+            <select
+              id="contact-project"
+              className={`${inputClasses} appearance-none pr-10 cursor-pointer`}
+              value={projectId}
+              onChange={(event) => setProjectId(event.target.value)}
+            >
+              <option value="" disabled>
+                Selecciona un proyecto de interés
+              </option>
+              {projects.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.title}
+                </option>
+              ))}
+            </select>
             <textarea
               className={inputClasses}
               placeholder={data.messagePlaceholder}
