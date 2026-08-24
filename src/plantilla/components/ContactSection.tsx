@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { ChevronDown, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import type { ContactData, Project } from "../data/interfaces";
 
 interface ContactSectionProps {
