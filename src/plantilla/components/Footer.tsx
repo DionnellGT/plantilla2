@@ -25,8 +25,9 @@ export const Footer = ({ data }: FooterProps) => {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <Mountain className="text-primary w-6 h-6" />
-            <span className="font-headline-md text-lg font-semibold text-on-surface">
-              {data.logoAlt}
+            <span className="font-headline-md text-lg font-semibold text-on-surface leading-tight flex flex-col">
+              <span>{data.brandNameLine1}</span>
+              {data.brandNameLine2 && <span>{data.brandNameLine2}</span>}
             </span>
           </div>
           <p className="text-sm text-on-surface-variant">{data.description}</p>

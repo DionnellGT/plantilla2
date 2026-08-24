@@ -25,6 +25,8 @@ export interface SocialLink {
 export interface NavigationData {
   logo: string;
   logoAlt: string;
+  brandNameLine1: string;
+  brandNameLine2: string;
   links: NavLink[];
   contact: ContactInfo;
 }
@@ -86,6 +88,8 @@ export interface FooterLinkGroup {
 export interface FooterData {
   logo: string;
   logoAlt: string;
+  brandNameLine1: string;
+  brandNameLine2: string;
   description: string;
   copyright: string;
   linkGroup: FooterLinkGroup;

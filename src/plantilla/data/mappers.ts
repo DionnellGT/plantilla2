@@ -38,6 +38,22 @@ const buildWhatsappLink = (telefono: string): string => {
   return `https://wa.me/${digits}`;
 };
 
+/**
+ * Nombre y apellido reales de misDatos, para mostrar la marca en 2 líneas
+ * (ej: "Gonzalo" / "Galvez"). Si el asesor no cargó apellido, la segunda
+ * línea queda vacía y solo se muestra el nombre.
+ */
+const getBrandNameLines = (bundle: ApiLandingBundle): { line1: string; line2: string } => {
+  const { misDatos } = bundle;
+
+  if (misDatos?.nombre) {
+    return { line1: misDatos.nombre, line2: misDatos.apellido || "" };
+  }
+
+  const [first, ...rest] = (bundle.fullName || BRAND_NAME).split(" ");
+  return { line1: first, line2: rest.join(" ") };
+};
+
 export const mapContactInfo = (bundle: ApiLandingBundle): ContactInfo => {
   const { misDatos } = bundle;
 
@@ -53,12 +69,18 @@ export const mapContactInfo = (bundle: ApiLandingBundle): ContactInfo => {
   };
 };
 
-export const mapNavigation = (bundle: ApiLandingBundle): NavigationData => ({
-  logo: bundle.misDatos?.logo || LOGO_URL,
-  logoAlt: bundle.fullName || BRAND_NAME,
-  links: NAV_LINKS,
-  contact: mapContactInfo(bundle),
-});
+export const mapNavigation = (bundle: ApiLandingBundle): NavigationData => {
+  const { line1, line2 } = getBrandNameLines(bundle);
+
+  return {
+    logo: bundle.misDatos?.logo || LOGO_URL,
+    logoAlt: bundle.fullName || BRAND_NAME,
+    brandNameLine1: line1,
+    brandNameLine2: line2,
+    links: NAV_LINKS,
+    contact: mapContactInfo(bundle),
+  };
+};
 
 export const mapHero = (bundle: ApiLandingBundle): HeroData => {
   const { banner, proyectos } = bundle;
@@ -154,6 +176,7 @@ export const mapContact = (bundle: ApiLandingBundle): ContactData => ({
 
 export const mapFooter = (bundle: ApiLandingBundle): FooterData => {
   const { misDatos } = bundle;
+  const { line1, line2 } = getBrandNameLines(bundle);
 
   const socialLinks: SocialLink[] = [
     misDatos?.instagram
@@ -167,6 +190,8 @@ export const mapFooter = (bundle: ApiLandingBundle): FooterData => {
   return {
     logo: misDatos?.logo || LOGO_URL,
     logoAlt: bundle.fullName || BRAND_NAME,
+    brandNameLine1: line1,
+    brandNameLine2: line2,
     description: FOOTER_DESCRIPTION,
     copyright: FOOTER_COPYRIGHT,
     linkGroup: FOOTER_LINK_GROUP,
