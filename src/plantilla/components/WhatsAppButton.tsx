@@ -1,4 +1,4 @@
-import { MessageSquare } from "lucide-react";
+import { MessageSquareText } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface WhatsAppButtonProps {
@@ -24,7 +24,7 @@ export const WhatsAppButton = ({
       target="_blank"
       rel="noopener noreferrer"
     >
-      {showIcon && <MessageSquare className="size-[18px] " />}
+      {showIcon && <MessageSquareText className="size-[18px] " />}
       {label}
     </a>
   );
