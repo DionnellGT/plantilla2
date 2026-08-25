@@ -29,7 +29,7 @@ export const Header = ({ data, onOpenMobileMenu }: HeaderProps) => {
       <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-margin-mobile md:px-gutter py-4">
         <a className="flex items-center gap-2" href="#">
           {data.logo ? (
-            <img src={data.logo} alt={data.logoAlt} className="h-9 w-auto object-contain" />
+            <img src={data.logo} alt={data.logoAlt} className="h-15 w-auto object-contain" />
           ) : (
             <>
               <Mountain className="text-primary w-7 h-7" />
