@@ -25,7 +25,7 @@ export const Footer = ({ data }: FooterProps) => {
         <div>
           <div className="flex items-center gap-2 mb-4">
             {data.logo ? (
-              <img src={data.logo} alt={data.logoAlt} className="h-8 w-auto object-contain" />
+              <img src={data.logo} alt={data.logoAlt} className="h-15 w-auto object-contain" />
             ) : (
               <>
                 <Mountain className="text-primary w-6 h-6" />
