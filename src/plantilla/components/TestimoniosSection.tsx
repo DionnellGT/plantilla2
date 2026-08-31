@@ -12,8 +12,7 @@ export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
 
   useEffect(() => {
     const updateVisibleCards = () => {
-      if (window.innerWidth >= 1024) setVisibleCards(4);
-      else if (window.innerWidth >= 768) setVisibleCards(3);
+      if (window.innerWidth >= 768) setVisibleCards(3);
       else setVisibleCards(2);
     };
     updateVisibleCards();
@@ -57,7 +56,7 @@ export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
             {data.testimonios.map((testimonio) => (
           <div
             key={testimonio.id}
-            className="shrink-0 w-[calc((100%-2rem)/2)] md:w-[calc((100%-4rem)/3)] lg:w-[calc((100%-6rem)/4)]"
+            className="shrink-0 w-[calc((100%-2rem)/2)] md:w-[calc((100%-4rem)/3)]  mx-auto"
           >
             <div
               className="w-full h-full bg-surface-container-low rounded-[24px] overflow-hidden soft-shadow fade-and-slide-up visible"
@@ -93,7 +92,7 @@ export const TestimoniosSection = ({ data }: TestimoniosSectionProps) => {
               )}
             </div>
 
-            <div className="p-6">
+            <div className="p-2">
               {testimonio.quote && (
                 <p className="font-body-md text-body-md text-on-surface-variant italic mb-4">
                   "{testimonio.quote}"
