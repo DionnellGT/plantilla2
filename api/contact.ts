@@ -15,7 +15,7 @@ export default async function handler(req: any, res: any) {
       telefono,
       email,
       proyecto,
-      mensage,
+      mensaje,
     } = req.body;
 
     if (!nombre || !telefono || !email) {
@@ -36,7 +36,7 @@ export default async function handler(req: any, res: any) {
         <p><strong>Teléfono:</strong> ${telefono}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Proyecto:</strong> ${proyecto || "No especificado"}</p>
-        <p><strong>Mensaje:</strong> ${mensage || "No hay mensaje"}</p>
+        <p><strong>Mensaje:</strong> ${mensaje || "No hay mensaje"}</p>
       `,
     });
 
