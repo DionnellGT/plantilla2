@@ -13,7 +13,7 @@ export interface ContactInfo {
   email: string;
 }
 
-export type SocialPlatform = "instagram" | "facebook";
+export type SocialPlatform = "instagram" | "facebook" | "tiktok";
 
 export interface SocialLink {
   id: string;
@@ -155,6 +155,7 @@ export interface ApiLandingMisDatos {
   telefono: string | null;
   facebook: string | null;
   instagram: string | null;
+  tiktok: string | null;
 }
 
 export interface ApiLandingProyecto {

@@ -1,65 +1,62 @@
-// api/contact.ts
 import { Resend } from "resend";
-import { buildContactEmailHtml } from "./email-template";
-import { buildAutoresponderHtml } from "./autoresponder-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req: Request) {
+export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
-    return new Response("Método no permitido", { status: 405 });
+    return res.status(405).json({
+      error: "Método no permitido",
+    });
   }
 
   try {
-    const { nombre, apellido, email, telefono, proyecto, mensaje } = await req.json();
+    const {
+      nombre,
+      telefono,
+      email,
+      proyecto,
+      mensage,
+    } = req.body;
 
-    // Validación mínima de datos requeridos
-    if (!nombre || !email || !telefono || !proyecto || !mensaje) {
-      return new Response(
-        JSON.stringify({ success: false, message: "Faltan campos requeridos" }),
-        { status: 400 }
-      );
+    if (!nombre || !telefono || !email) {
+      return res.status(400).json({
+        error: "Faltan campos obligatorios",
+      });
     }
 
-    // 1. Correo interno — notifica al equipo de El Avellano
-    const notificacion = resend.emails.send({
-      from: "Pag Web El Avellano <noreply@elavellano.cl>",
-      to: "contacto@elavellano.cl",
+    const { data, error } = await resend.emails.send({
+      from: "Landing plantilla2 <noreply@elavellano.cl>",
+      to: ["marketing@elavellano.cl"],
       replyTo: email,
-      subject: `${nombre} ${apellido} — ${proyecto}`,
-      html: buildContactEmailHtml({ nombre, apellido, email, telefono, proyecto, mensaje }),
+      subject: `Nuevo contacto desde la web - ${nombre}`,
+      html: `
+        <h2>Nuevo contacto desde la página web</h2>
+
+        <p><strong>Nombre:</strong> ${nombre}</p>
+        <p><strong>Teléfono:</strong> ${telefono}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Proyecto:</strong> ${proyecto || "No especificado"}</p>
+        <p><strong>Mensaje:</strong> ${mensage || "No hay mensaje"}</p>
+      `,
     });
 
-    // 2. Autoresponder — confirma al cliente que su mensaje llegó
-    const autorespuesta = resend.emails.send({
-      from: "El Avellano <noreply@elavellano.cl>",
-      to: email,
-      subject: "Hemos recibido tu mensaje",
-      html: buildAutoresponderHtml({ nombre }),
+    if (error) {
+      console.error(error);
+
+      return res.status(500).json({
+        error: "No se pudo enviar el correo",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data,
     });
-
-    // Se envían en paralelo para no duplicar tiempo de espera
-    const [resultNotificacion, resultAutorespuesta] = await Promise.allSettled([
-      notificacion,
-      autorespuesta,
-    ]);
-
-    // El correo interno es crítico: si falla, se considera error
-    if (resultNotificacion.status === "rejected") {
-      console.error("Error enviando notificación interna:", resultNotificacion.reason);
-      return new Response(JSON.stringify({ success: false }), { status: 500 });
-    }
-
-    // El autoresponder es deseable pero no crítico: si falla, solo se loguea
-    if (resultAutorespuesta.status === "rejected") {
-      console.error("Error enviando autoresponder al cliente:", resultAutorespuesta.reason);
-    }
-
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ success: false }), { status: 500 });
+
+    return res.status(500).json({
+      error: "Error interno del servidor",
+    });
   }
 }
-
-export const config = { runtime: "edge" };

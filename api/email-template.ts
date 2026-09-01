@@ -1,16 +1,14 @@
 interface ContactEmailData {
   nombre: string;
-  apellido: string;
   email: string;
   telefono: string;
   proyecto: string;
-  mensaje: string;
 }
 
 const LOGO_URL = "https://elavellano.cl/logo1.png";
 
 export function buildContactEmailHtml(data: ContactEmailData): string {
-  const { nombre, apellido, email, telefono, proyecto, mensaje } = data;
+  const { nombre, email, telefono, proyecto } = data;
 
   return `
 <!DOCTYPE html>
@@ -60,7 +58,7 @@ export function buildContactEmailHtml(data: ContactEmailData): string {
                     Nombre
                   </td>
                   <td style="padding:12px 0; border-bottom:1px solid #e7e5e4; color:#1c1917; font-size:15px; font-weight:600;">
-                    ${escapeHtml(nombre)} ${escapeHtml(apellido)}
+                    ${escapeHtml(nombre)}
                   </td>
                 </tr>
                 <tr>
@@ -89,14 +87,7 @@ export function buildContactEmailHtml(data: ContactEmailData): string {
                     </span>
                   </td>
                 </tr>
-                <tr>
-                  <td style="padding:12px 0; color:#a8a29e; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; vertical-align:top;">
-                    Mensaje
-                  </td>
-                  <td style="padding:12px 0; color:#1c1917; font-size:15px; line-height:1.6;">
-                    ${escapeHtml(mensaje).replace(/\n/g, "<br/>")}
-                  </td>
-                </tr>
+                
               </table>
 
               <!-- CTA -->
