@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { Mail, Phone } from "lucide-react";
 import type { ContactData, Project } from "../data/interfaces";
 
@@ -7,32 +8,54 @@ interface ContactSectionProps {
   projects: Project[];
 }
 
+interface ContactForm {
+  nombre: string;
+  telefono: string;
+  email: string;
+  proyecto: string;
+  mensaje: string;
+}
+
+
 const inputClasses =
   "bg-surface-container border border-outline-variant rounded-xl px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary transition-colors";
 
 export const ContactSection = ({ data, projects }: ContactSectionProps) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [projectId, setProjectId] = useState("");
-  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactForm>();
 
-    const projectTitle = projects.find((project) => project.id === projectId)?.title;
-
-    const lines = [
-      "Hola, me gustaría recibir más información.",
-      name && `Nombre: ${name}`,
-      phone && `Teléfono: ${phone}`,
-      email && `Correo: ${email}`,
-      projectTitle && `Proyecto de interés: ${projectTitle}`,
-      message && `Mensaje: ${message}`,
-    ].filter(Boolean);
-
-    const whatsappUrl = `${data.contact.whatsappLink}?text=${encodeURIComponent(lines.join("\n"))}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  const onSubmit = async (data: ContactForm) => {
+    setIsSuccess(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      await fetch(
+      "https://script.google.com/macros/s/AKfycbwGPBJS5EcPyn16uChhE1KTWhTsmAtpGnmt5iontG9uxIM2QDRt01s7_Mm8hhswUgkh/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+      );
+      if (res.ok) {
+        setIsSuccess(true);
+        reset();
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        setIsSuccess(false);
+      }
+    } catch {
+      setIsSuccess(false);
+    }
   };
 
   return (
@@ -78,58 +101,80 @@ export const ContactSection = ({ data, projects }: ContactSectionProps) => {
         </div>
 
         <div className="p-10 md:p-16">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <input
               type="text"
+              {...register("nombre", { required: true })}
               className={inputClasses}
               placeholder={data.namePlaceholder}
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              required
-            />
+              />
+              {errors.nombre && (
+                <span className="text-red-400 text-[11px]">Este campo es obligatorio</span>
+              )}
             <input
               type="tel"
               className={inputClasses}
               placeholder={data.phonePlaceholder}
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-              required
+              {...register("telefono", { required: true })}
             />
+            {errors.telefono && (
+              <span className="text-red-400 text-[11px]">Este campo es obligatorio</span>
+            )}
             <input
               type="email"
               className={inputClasses}
               placeholder={data.emailPlaceholder}
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
+              {...register("email", { required: true })}
             />
-            <select
-              id="contact-project"
-              className={`${inputClasses} appearance-none pr-10 cursor-pointer`}
-              value={projectId}
-              onChange={(event) => setProjectId(event.target.value)}
-            >
-              <option value="" disabled>
-                Selecciona un proyecto de interés
-              </option>
-              {projects.map((project) => (
-                <option key={project.id} value={project.id}>
-                  {project.title}
+            {errors.email && (
+              <span className="text-red-400 text-[11px]">Este campo es obligatorio</span>
+            )}
+            <Controller
+              name="proyecto"
+              control={control}
+              rules={{
+                      validate: (v) => (v && v !== "") || "Debes seleccionar un proyecto",
+                    }}
+              render={({ field }) => (
+              <select
+                id="contact-project"
+                className={`${inputClasses} appearance-none pr-10 cursor-pointer`}
+                {...field}
+              >
+                <option value="" >
+                  Selecciona un proyecto de interés
                 </option>
-              ))}
-            </select>
+                {projects.map((project) => (
+                  <option key={project.id} value={project.title}>
+                    {project.title}
+                  </option>
+                ))}
+              </select>
+              )}
+            />
+            {errors.proyecto && (
+              <span className="text-red-400 text-[11px]">{errors.proyecto.message}</span>
+            )}
             <textarea
               className={inputClasses}
               placeholder={data.messagePlaceholder}
               rows={4}
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
+              {...register("mensaje", { required: true })}
             />
+            {errors.mensaje && (
+              <span className="text-red-400 text-[11px]">Este campo es obligatorio</span>
+            )}
+            {/* Feedback */}
+            {isSuccess && (
+              <p className="text-green-600 font-manrope text-[13px] text-center">
+                ✓ Mensaje enviado. ¡Pronto nos pondremos en contacto!
+              </p>
+            )}
             <button
               type="submit"
               className="bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors soft-shadow"
             >
-              {data.submitLabel}
+              {isSubmitting ? "Enviando..." : data.submitLabel}
             </button>
           </form>
         </div>
