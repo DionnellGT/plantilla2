@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Mail, Phone } from "lucide-react";
 import type { ContactData, Project } from "../data/interfaces";
