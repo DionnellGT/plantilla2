@@ -14,8 +14,8 @@ interface ContactForm {
   email: string;
   proyecto: string;
   mensaje: string;
+  asesor: string;
 }
-
 
 const inputClasses =
   "bg-surface-container border border-outline-variant rounded-xl px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary transition-colors";
@@ -32,6 +32,7 @@ export const ContactSection = ({ data, projects }: ContactSectionProps) => {
   } = useForm<ContactForm>();
 
   const onSubmit = async (data: ContactForm) => {
+    data.asesor = "Test Plantilla 2"
     setIsSuccess(false);
     try {
       const res = await fetch("/api/contact", {
